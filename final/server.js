@@ -50,6 +50,12 @@ app.post('/weather',(req,res)=>{
         })
     })
 })
+app.post('exchange',(req,res)=>{
+    const from = req.body.from
+    const into = req.body.into
+    const apiKey = "d1bb088754717d83e0298584195902fe"
+    const url = ""
+})
 app.listen(port,()=>{
     console.log("Server is running on port: "+port)
 })
