@@ -1,2 +1,2 @@
-# hackers
+# Comfy
 Online furniture store front
