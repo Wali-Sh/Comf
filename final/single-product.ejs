@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About || Comfy Store</title>
+    <title>Single Product || Comfy Store</title>
     <!-- normalize  -->
     <link rel="stylesheet" href="./css/normalize.css" />
     <!-- font awesome -->
@@ -26,13 +26,13 @@
           </button>
           <ul class="nav-links">
             <li>
-              <a href="index.html" class="nav-link"> home </a>
+              <a href="index.ejs" class="nav-link"> home </a>
             </li>
             <li>
-              <a href="products.html" class="nav-link"> products </a>
+              <a href="products.ejs" class="nav-link"> products </a>
             </li>
             <li>
-              <a href="about.html" class="nav-link"> about </a>
+              <a href="about.ejs" class="nav-link"> about </a>
             </li>
           </ul>
         </div>
@@ -51,75 +51,35 @@
     <!-- page hero -->
     <section class="page-hero">
       <div class="section-center">
-        <h3 class="page-hero-title">Home / About</h3>
+        <h3 class="page-hero-title">Home / Single Product</h3>
       </div>
     </section>
-    <!-- about -->
-    <section class="section section-center">
-      <div class="title">
-        <span></span>
-        <h2>About Us </h2>
-        <span></span>
+    <!-- product info -->
+    <section class="single-product section">
+      <div class="section-center single-product-center">
+        <img
+          src="https://dl.airtable.com/.attachments/14ac9e946e1a02eb9ce7d632c83f742f/4fd98e64/product-1.jpeg"
+          class="single-product-img img"
+          alt=""
+        />
+        <article class="single-product-info">
+          <div>
+            <h2 class="single-product-title">high-back bench</h2>
+            <p class="single-product-company text-slanted">by marcos</p>
+            <span class="single-product-price">$30.00</span>
+            <div class="single-product-colors">
+              <span class="product-color"></span>
+              <span class="product-color product-color-red"></span>
+            </div>
+            <p class="single-product-desc">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id,
+              modi? Minima libero doloremque necessitatibus! Praesentium
+              recusandae quod nesciunt animi voluptatem!
+            </p>
+            <button class="addToCartBtn btn" data-id="id">add to cart</button>
+          </div>
+        </article>
       </div>
-    <br>
-      <h3><b>Comfy Company</b></h3>
-      <p class="about-text">
-      <b><i>Comfy</i></b> company is an online platform for online purchase of
-      goods and commodities where you can find local products of the current area of living.
-      <b><i>Comfy</i></b> is commited to provide the best quality and price with free delivery across <thead>
-        country; here you can order and submit a petition of your intended product and our staff will try
-        to reach out to you as soon as possible.
-
-
-
-
-      </p>
-
-<br>
-      <h3 ><b>Staff Members</b></h3>
-      <p class="about-text">
-        <b><i>Comfy</i></b>'s development honor goes to four dedicated and motivated students of <b>Astana IT University</b>
-        who tirelessly participated to build something that worths it from scratch. The names are listed below:
-          </p>
-
-
-
-    <section>
-
-
-      <p class="about-text">  <img src="assets/shokrulla.jpg" alt="shokrullah"   class="staff-pics">
-        <b>Shokrullah Wali</b><br> is a first year of <i>Software Engineering </i>major of <b>Astana IT University</b>.
-        </p>
-      </section>
-
-
-<section>
-
-
-      <p class="about-text"> <img src="assets/Shokoor.jpg" alt="shokoor Amini" class="staff-pics"> <b>Abdul Shokoor Amini</b><br> is student of <i>Computer Science</i> at
-        <b>Astana IT University</b>.
-        </p>
-</section>
-
-<section>
-
-      <p class="about-text"> <img src="assets/reza1.jpg" alt="" class="staff-pics"> <b>Ghulam Reza Faqiri</b><br> is an <i>Information Technology (IT)</i> student at <b>Astana IT University</b>
-        .</p>
-    </section>
-
-    <section>
-
-
-      <p class="about-text">  <img src="assets/mahdi.jpg" alt="" class="staff-pics"> <b>Mahdi Habibi</b><br> is <i>Computer Science</i> first year student of <b>Astana IT University</b>.
-        </p>
-        </section>
-<br>
-   <h3><b>Why Using <i>Comfy?</i></b></h3>
-   <p class="about-text">Most of the websites and online shopping platforms in Kazakhstan, like Wildberries, use only Russian and Kazakh languages and doesn't provide English menues for foriegners; hence,
-   <b><i>Comfy</i></b> vividly understands this and facilitates. Moreover, we provide low price and good quality coupled with free delivery to step door.
- </p>
-
-
     </section>
     <!-- sidebar -->
     <div class="sidebar-overlay">
@@ -131,19 +91,19 @@
         <!-- links -->
         <ul class="sidebar-links">
           <li>
-            <a href="index.html" class="sidebar-link">
+            <a href="index.ejs" class="sidebar-link">
               <i class="fas fa-home fa-fw"></i>
               home
             </a>
           </li>
           <li>
-            <a href="products.html" class="sidebar-link">
+            <a href="products.ejs" class="sidebar-link">
               <i class="fas fa-couch fa-fw"></i>
               products
             </a>
           </li>
           <li>
-            <a href="about.html" class="sidebar-link">
+            <a href="about.ejs" class="sidebar-link">
               <i class="fas fa-book fa-fw"></i>
               about
             </a>
@@ -271,6 +231,7 @@
       </div>
     </div>
     </div>
+    <!-- app.js -->
     <script src="./js/app.js"></script>
   </body>
 </html>
