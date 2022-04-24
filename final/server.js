@@ -10,24 +10,25 @@ app.use(express.static('final'))
 app.use('/css', express.static(__dirname+ '/css'))
 app.use('/css', express.static(__dirname+ '/css'))
 app.use('/css', express.static(__dirname+ '/css'))
-//app.use('/img',express.static(__dirname+'/img'))
+app.use('/img',express.static(__dirname+'/img'))
+app.use('viewport,ejs')
 app.get('/',(req, res )=>{
-    res.sendFile(__dirname +'/index.html')
+    res.sendFile(__dirname +'/index.ejs')
 })
-app.get('/products.html',(req,res)=>{
-    res.sendFile(__dirname+'/products.html')
+app.get('/products.ejs',(req,res)=>{
+    res.sendFile(__dirname+'/products.ejs')
 })
-app.get('/about.html',(req,res)=>{
-    res.sendFile(__dirname+'/about.html')
+app.get('/about.ejs',(req,res)=>{
+    res.sendFile(__dirname+'/about.ejs')
 })
-app.get('/login.html',(req,res)=>{
-    res.sendFile(__dirname+'/login.html')
+app.get('/login.ejs',(req,res)=>{
+    res.sendFile(__dirname+'/login.ejs')
 })
-app.get('/index.html',(req,res)=>{
-    res.sendFile(__dirname+'/index.html')
+app.get('/index.ejs',(req,res)=>{
+    res.sendFile(__dirname+'/index.ejs')
 })
-app.get('/ifram.html',(req,res)=>{
-    res.sendFile(__dirname+'/ifram.html')
+app.get('/ifram.ejs',(req,res)=>{
+    res.sendFile(__dirname+'/ifram.ejs')
 })
 // Shows the weather inside a Frame
 app.post('/weather',(req,res)=>{

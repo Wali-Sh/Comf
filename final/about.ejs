@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en,kz,rus">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home || Comfy Store</title>
+    <title>About || Comfy Store</title>
     <!-- normalize  -->
     <link rel="stylesheet" href="./css/normalize.css" />
     <!-- font awesome -->
@@ -17,7 +17,7 @@
   </head>
   <body>
     <!-- navbar -->
-    <nav class="navbar">
+    <nav class="navbar page">
       <div class="nav-center">
         <!-- links -->
         <div>
@@ -26,123 +26,100 @@
           </button>
           <ul class="nav-links">
             <li>
-              <a href="index.html" class="nav-link"> home </a>
+              <a href="index.ejs" class="nav-link"> home </a>
             </li>
             <li>
-              <a href="products.html" class="nav-link"> products </a>
+              <a href="products.ejs" class="nav-link"> products </a>
             </li>
             <li>
-              <a href="about.html" class="nav-link"> about </a>
-            </li>
-            <li>
-              <a href="login.html" class="nav-link">Log In</a>
+              <a href="about.ejs" class="nav-link"> about </a>
             </li>
           </ul>
         </div>
         <!-- logo -->
-        <img src="./assets/logo-white.svg" class="nav-logo" alt="logo" />
+        <img src="./assets/logo-black.svg" class="nav-logo" alt="logo" />
         <!-- cart icon -->
         <div class="toggle-container">
           <button class="toggle-cart">
             <i class="fas fa-shopping-cart"></i>
           </button>
-          <span class="cart-item-count">2</span>
+          <span class="cart-item-count">1</span>
         </div>
       </div>
     </nav>
-    <!-- hero -->
-    <section class="hero">
-      <div class="hero-container">
-        <h1 class="text-slanted">rest, relax, unwind</h1>
-        <h3 class="text-slanted">embrace your choices - we do</h3>
-        <a href="./products.html" class="btn hero-btn text-slanted">
-          shop now
-        </a>
+    <!-- end of navbar-->
+    <!-- page hero -->
+    <section class="page-hero">
+      <div class="section-center">
+        <h3 class="page-hero-title">Home / About</h3>
       </div>
     </section>
-
-    <!-- featured products -->
-    <section class="section featured">
+    <!-- about -->
+    <section class="section section-center">
       <div class="title">
         <span></span>
-        <h2>featured</h2>
+        <h2>About Us </h2>
         <span></span>
       </div>
-      <div class="section-center featured-center">
-        <!-- single product -->
-        <article class="product">
-          <div class="product-container">
-            <img
-              src="https://dl.airtable.com/.attachments/14ac9e946e1a02eb9ce7d632c83f742f/4fd98e64/product-1.jpeg"
-              class="product-img img"
-              alt=""
-            />
+    <br>
+      <h3><b>Comfy Company</b></h3>
+      <p class="about-text">
+      <b><i>Comfy</i></b> company is an online platform for online purchase of
+      goods and commodities where you can find local products of the current area of living.
+      <b><i>Comfy</i></b> is commited to provide the best quality and price with free delivery across <thead>
+        country; here you can order and submit a petition of your intended product and our staff will try
+        to reach out to you as soon as possible.
 
-            <div class="product-icons">
-              <a href="single-product.html" class="product-icon">
-                <i class="fas fa-search"></i>
-              </a>
-              <button class="product-cart-btn product-icon" data-id="1">
-                <i class="fas fa-shopping-cart"></i>
-              </button>
-            </div>
-          </div>
-          <footer>
-            <h5 class="product-name">high-back bench</h5>
-            <span class="product-price">$9.99</span>
-          </footer>
-        </article>
-        <!-- end of single product -->
-        <!-- single product -->
-        <article class="product">
-          <div class="product-container">
-            <img
-              src="https://dl.airtable.com/.attachments/3245c726ee77d73702ba8c3310639727/f000842b/product-5.jpg"
-              class="product-img img"
-              alt=""
-            />
 
-            <div class="product-icons">
-              <a href="single-product.html" class="product-icon">
-                <i class="fas fa-search"></i>
-              </a>
-              <button class="product-cart-btn product-icon" data-id="1">
-                <i class="fas fa-shopping-cart"></i>
-              </button>
-            </div>
-          </div>
-          <footer>
-            <h5 class="product-name">leather sofa</h5>
-            <span class="product-price">$9.99</span>
-          </footer>
-        </article>
-        <!-- end of single product -->
-        <!-- single product -->
-        <article class="product">
-          <div class="product-container">
-            <img
-              src="https://dl.airtable.com/.attachments/da5e17fd71f50578d525dd5f596e407e/d5e88ac8/product-2.jpg"
-              class="product-img img"
-              alt=""
-            />
 
-            <div class="product-icons">
-              <a href="single-product.html" class="product-icon">
-                <i class="fas fa-search"></i>
-              </a>
-              <button class="product-cart-btn product-icon">
-                <i class="fas fa-shopping-cart"></i>
-              </button>
-            </div>
-          </div>
-          <footer>
-            <h5 class="product-name">entertainment center</h5>
-            <span class="product-price">$9.99</span>
-          </footer>
-        </article>
-        <!-- end of single product -->
-      </div>
-      <a href="products.html" class="btn"> all products </a>
+
+      </p>
+
+<br>
+      <h3 ><b>Staff Members</b></h3>
+      <p class="about-text">
+        <b><i>Comfy</i></b>'s development honor goes to four dedicated and motivated students of <b>Astana IT University</b>
+        who tirelessly participated to build something that worths it from scratch. The names are listed below:
+          </p>
+
+
+
+    <section>
+
+
+      <p class="about-text">  <img src="assets/shokrulla.jpg" alt="shokrullah"   class="staff-pics">
+        <b>Shokrullah Wali</b><br> is a first year of <i>Software Engineering </i>major of <b>Astana IT University</b>.
+        </p>
+      </section>
+
+
+<section>
+
+
+      <p class="about-text"> <img src="assets/Shokoor.jpg" alt="shokoor Amini" class="staff-pics"> <b>Abdul Shokoor Amini</b><br> is student of <i>Computer Science</i> at
+        <b>Astana IT University</b>.
+        </p>
+</section>
+
+<section>
+
+      <p class="about-text"> <img src="assets/reza1.jpg" alt="" class="staff-pics"> <b>Ghulam Reza Faqiri</b><br> is an <i>Information Technology (IT)</i> student at <b>Astana IT University</b>
+        .</p>
+    </section>
+
+    <section>
+
+
+      <p class="about-text">  <img src="assets/mahdi.jpg" alt="" class="staff-pics"> <b>Mahdi Habibi</b><br> is <i>Computer Science</i> first year student of <b>Astana IT University</b>.
+        </p>
+        </section>
+<br>
+   <h3><b>Why Using <i>Comfy?</i></b></h3>
+   <p class="about-text">Most of the websites and online shopping platforms in Kazakhstan, like Wildberries, use only Russian and Kazakh languages and doesn't provide English menues for foriegners; hence,
+   <b><i>Comfy</i></b> vividly understands this and facilitates. Moreover, we provide low price and good quality coupled with free delivery to step door.
+ </p>
+
+
     </section>
     <!-- sidebar -->
     <div class="sidebar-overlay">
@@ -154,50 +131,19 @@
         <!-- links -->
         <ul class="sidebar-links">
           <li>
-            <a href="index.html" class="sidebar-link">
+            <a href="index.ejs" class="sidebar-link">
               <i class="fas fa-home fa-fw"></i>
               home
             </a>
           </li>
           <li>
-            <a href="products.html" class="sidebar-link">
+            <a href="products.ejs" class="sidebar-link">
               <i class="fas fa-couch fa-fw"></i>
               products
             </a>
           </li>
           <li>
-            <a href="about.html" class="sidebar-link">
-              <i class="fas fa-book fa-fw"></i>
-              about
-            </a>
-          </li>
-        </ul>
-      </aside>
-    </div>
-
-    <!-- sidebar -->
-    <div class="sidebar-overlay">
-      <aside class="sidebar">
-        <!-- close -->
-        <button class="sidebar-close">
-          <i class="fas fa-times"></i>
-        </button>
-        <!-- links -->
-        <ul class="sidebar-links">
-          <li>
-            <a href="index.html" class="sidebar-link">
-              <i class="fas fa-home fa-fw"></i>
-              home
-            </a>
-          </li>
-          <li>
-            <a href="products.html" class="sidebar-link">
-              <i class="fas fa-couch fa-fw"></i>
-              products
-            </a>
-          </li>
-          <li>
-            <a href="about.html" class="sidebar-link">
+            <a href="about.ejs" class="sidebar-link">
               <i class="fas fa-book fa-fw"></i>
               about
             </a>
@@ -263,12 +209,7 @@
                 <i class="fas fa-chevron-down"></i>
               </button>
             </div>
-
           </article>
-            <div>
-                <iframe src="ifram.html">
-                </iframe>
-            </div>
           <!-- end of single cart item -->
         </div>
         <!-- footer -->
@@ -296,12 +237,12 @@
           <td> <a href="#">Terms of Service</a></td>
           </tr>
 
-          </td></th></table>
+        </table>
       </div>
       <div class="footer-heading footer-2">
         <table><th><tr>
           <td> <h2>Contact Us</h2></td></tr>
-          <tr> <td><a href="#">Jobs</a></th></tr>
+            <tr> <td><a href="#">Jobs</a></td></tr>
           <tr><td> <a href="#">Support</a></td></tr>
           <tr><td> <a href="#">Contact</a></td></tr>
           <tr> <td> <a href="#">Sponsership</a></td></tr>
