@@ -1,6 +1,8 @@
 const express = require('express')
-const http = require('http')
+const https = require('https')
 const bodyParser = require('body-parser')
+const request = require('request')
+const {response} = require("express");
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}))
 const port = 4000;
@@ -50,12 +52,7 @@ app.post('/weather',(req,res)=>{
         })
     })
 })
-app.post('exchange',(req,res)=>{
-    const from = req.body.from
-    const into = req.body.into
-    const apiKey = "d1bb088754717d83e0298584195902fe"
-    const url = ""
-})
+
 app.listen(port,()=>{
     console.log("Server is running on port: "+port)
 })
