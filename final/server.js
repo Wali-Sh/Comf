@@ -1,8 +1,10 @@
 const express = require('express')
+const layouts = require('express-ejs-layouts')
 const https = require('https')
 const bodyParser = require('body-parser')
 const request = require('request')
 const {response} = require("express");
+const { lazyrouter } = require('express/lib/application');
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}))
 const port = 3030;
@@ -11,24 +13,24 @@ app.use('/css', express.static(__dirname+ '/css'))
 app.use('/css', express.static(__dirname+ '/css'))
 app.use('/css', express.static(__dirname+ '/css'))
 app.use('/img',express.static(__dirname+'/img'))
-app.use('viewport,ejs')
+app.set('view engine','ejs')
 app.get('/',(req, res )=>{
-    res.sendFile(__dirname +'/index.ejs')
+    res.render('index')
 })
 app.get('/products.ejs',(req,res)=>{
-    res.sendFile(__dirname+'/products.ejs')
+    res.render('products')
 })
 app.get('/about.ejs',(req,res)=>{
-    res.sendFile(__dirname+'/about.ejs')
+    res.render('about')
 })
 app.get('/login.ejs',(req,res)=>{
-    res.sendFile(__dirname+'/login.ejs')
+    res.render('login')
 })
 app.get('/index.ejs',(req,res)=>{
-    res.sendFile(__dirname+'/index.ejs')
+    res.render('index')
 })
 app.get('/ifram.ejs',(req,res)=>{
-    res.sendFile(__dirname+'/ifram.ejs')
+    res.render('ifram')
 })
 // Shows the weather inside a Frame
 app.post('/weather',(req,res)=>{
