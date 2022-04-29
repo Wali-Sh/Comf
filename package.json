@@ -2,7 +2,7 @@
   "name": "html-css-comfy-store-js-course-main",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node final/server.js",
     "dev": "nodemon final/server.js"

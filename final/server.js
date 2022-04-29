@@ -1,6 +1,7 @@
 if(process.env.NODE_ENV !== 'production'){
     require('dotenv').config()
-}// will bring all enviroment requirements and set them inside process dotenv
+}
+// will bring all enviroment requirements and set them inside process dotenv
 
 const express = require('express');
 const layouts = require('express-ejs-layouts');
@@ -50,7 +51,7 @@ app.use('/js', express.static(__dirname+ '/js'));
 app.set('view-engine', 'ejs');
 app.use(cookiesPaser());
 // all routes
-app.get('/', checkAuthenticated, (req, res )=>{
+app.get('/', (req, res )=>{
     res.render('index.ejs', {name: req.body.name});
 })
 app.get('/products', (req, res)=>{
@@ -67,17 +68,20 @@ app.post('/login', passport.authenticate('local',{
     failureRedirect: '/login',
     failureFlash: true
 }) )
-app.get('/sign-up',checkNotAuthenticated,(req, res)=>{
-    res.render('sign-up.ejs');
+app.get('/register',checkNotAuthenticated,(req, res)=>{
+    res.render('register.ejs')
 })
 app.get('/index',(req,res)=>{
     res.render('index.ejs');
 })
 app.get('/ifram',(req,res)=>{
-    res.render('ifram.ejs ');
+    res.render('ifram.ejs');
+})
+app.get('/profile',checkNotAuthenticated, (req,res)=>{
+    res.render('profile.ejs');
 })
 // all form validations and cookie validations
-app.post('/signUp',checkNotAuthenticated, async (req, res)=>{
+app.post('/register',checkNotAuthenticated, async (req, res)=>{
     try{
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         const hashedCPass = await bcrypt.hash(req.body.confirmPassword, 10);
