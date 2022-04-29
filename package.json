@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon final/server.js"
   },
   "author": "Shokrullah, Reza, Shokoor, Mahdi",
   "license": "ISC",
