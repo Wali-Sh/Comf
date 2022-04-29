@@ -53,7 +53,7 @@ app.use(cookiesPaser());
 app.get('/', checkAuthenticated, (req, res )=>{
     res.render('index.ejs', {name: req.body.name});
 })
-app.get('/  products', (req, res)=>{
+app.get('/products', (req, res)=>{
     res.render('products.ejs');
 })
 app.get('/about',(req,res)=>{

@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node final/server.js",
     "dev": "nodemon final/server.js"
   },
   "author": "Shokrullah, Reza, Shokoor, Mahdi",
