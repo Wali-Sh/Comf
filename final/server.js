@@ -20,11 +20,12 @@ const initializePassport = require('./passportConfig');
 const flash = require('express-flash');
 initializePassport(
     passport,
-    email => users.find(user => user.email === email),
-    id => users.find(user => user.id === id )
+    email => data.find(user => user.email === email),
+    id => data.find(user => user.id === id )
 )
 
 
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.urlencoded({extended: false}));
 app.use(flash())
@@ -37,9 +38,18 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
 
+
+// database connection
+mongodb.connect('mongodb+srv://Wali:Wali1078$@cluster0.xeeua.mongodb.net/comfy?retryWrites=true&w=majority',{
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+const mydb = mongodb.connection;
+mydb.on('error', () => console.log('Error in connecting to Database'))
+mydb.once('open',()=> console.log('connected'))
+
 const port = process.env.PORT || 3000;
 
-const users = [];
 
 // all usages of express
 app.use(express.static('final'));
@@ -52,7 +62,7 @@ app.set('view-engine', 'ejs');
 app.use(cookiesPaser());
 // all routes
 app.get('/', (req, res )=>{
-    res.render('index.ejs', {name: req.body.name});
+    res.render('index.ejs');
 })
 app.get('/products', (req, res)=>{
     res.render('products.ejs');
@@ -64,7 +74,7 @@ app.get('/login',checkNotAuthenticated, checkNotAuthenticated,(req, res)=>{
     res.render('login.ejs');
 })
 app.post('/login', passport.authenticate('local',{
-    successRedirect: '/',
+    successRedirect: '/index',
     failureRedirect: '/login',
     failureFlash: true
 }) )
@@ -78,26 +88,30 @@ app.get('/ifram',(req,res)=>{
     res.render('ifram.ejs');
 })
 app.get('/profile',checkNotAuthenticated, (req,res)=>{
-    res.render('profile.ejs');
+    res.render('profile.ejs',{name: req.body.name});
 })
 // all form validations and cookie validations
-app.post('/register',checkNotAuthenticated, async (req, res)=>{
-    try{
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        const hashedCPass = await bcrypt.hash(req.body.confirmPassword, 10);
-        users.push({
-            id: Data.now().toString(),
-            name: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            password: hashedPassword,
-            confirmPassword: hashedCPass
-        })
-    res.redirect('/login');
-    } catch{
-        res.redirect('/sing-up');
-    }
-    console.log(users);
+app.post('/register',checkNotAuthenticated, async (req, res)=>{     
+   let firstName = req.body.firstName;
+   let lastName = req.body.lastName;
+   let email = req.body.email;
+   let password = await bcrypt.hash(req.body.password, 10);
+   let confirmPassword = await bcrypt.hash(req.body.confirmPassword, 10);
+
+   var data = {
+       "FirstName": firstName,
+       "LastName": lastName,
+       "Email": email,
+       "password": password,
+       "ConfrimPassword": confirmPassword
+   }
+   mydb.collection('users').insertOne(data, (err, collection)=>{
+       if(err){
+           throw err;
+       }
+      console.log("Database is connected")
+   });
+   return res.redirect('/login')
 })
 // Shows the weather inside a Frame
 app.post('/weather',(req,res)=>{
