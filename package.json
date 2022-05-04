@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node final/server.js",
-    "dev": "nodemon final/server.js"
+    "dev": "nodemon server.js"
   },
   "author": "Shokrullah, Reza, Shokoor, Mahdi",
   "license": "ISC",

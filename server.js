@@ -2,7 +2,6 @@ if(process.env.NODE_ENV !== 'production'){
     require('dotenv').config()
 }
 // will bring all enviroment requirements and set them inside process dotenv
-
 const express = require('express');
 const layouts = require('express-ejs-layouts');
 const https = require('https');
@@ -16,14 +15,14 @@ const methodOverride = require('method-override');
 const app = express();
 const passport = require('passport');
 const falsh = require('express-flash');
-const initializePassport = require('./passportConfig');
+const initializePassport = require('./final/passportConfig');
 const flash = require('express-flash');
+const { rmSync } = require('fs');
 initializePassport(
     passport,
-    email => data.find(user => user.email === email),
-    id => data.find(user => user.id === id )
+    email => data.findOne(user => user.email === email),
+    password => data.findOne(user => user.passport === password)
 )
-
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}));
@@ -48,7 +47,10 @@ const mydb = mongodb.connection;
 mydb.on('error', () => console.log('Error in connecting to Database'))
 mydb.once('open',()=> console.log('connected'))
 
-const port = process.env.PORT || 3000;
+let port = process.env.PORT;
+if (port == null || port == "") {
+    port = 3000;
+}
 
 
 // all usages of express
@@ -70,7 +72,7 @@ app.get('/products', (req, res)=>{
 app.get('/about',(req,res)=>{
     res.render('about.ejs');
 })
-app.get('/login',checkNotAuthenticated, checkNotAuthenticated,(req, res)=>{
+app.get('/login',checkNotAuthenticated,(req, res)=>{
     res.render('login.ejs');
 })
 app.post('/login', passport.authenticate('local',{
@@ -91,7 +93,7 @@ app.get('/profile',checkNotAuthenticated, (req,res)=>{
     res.render('profile.ejs',{name: req.body.name});
 })
 // all form validations and cookie validations
-app.post('/register',checkNotAuthenticated, async (req, res)=>{     
+app.post('/register',checkNotAuthenticated, async (req, res)=>{    
    let firstName = req.body.firstName;
    let lastName = req.body.lastName;
    let email = req.body.email;
@@ -113,6 +115,7 @@ app.post('/register',checkNotAuthenticated, async (req, res)=>{
    });
    return res.redirect('/login')
 })
+
 // Shows the weather inside a Frame
 app.post('/weather',(req,res)=>{
     let city = req.body.city
