@@ -23,7 +23,7 @@ exports.create = async (req, res) => {
 exports.findOne = async (req, res) => {
     try {
         const user = await UserModel.findOne({email: req.query.email}).exec(); 
-        const password = await UserModel.findOne({email: req.query.password}).exec();
+        const password = await UserModel.findOne({password: req.query.password}).exec();
         res.redirect('/index');
     } catch(error) {
         //res.status(404).json({ message: error.message});

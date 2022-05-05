@@ -15,14 +15,10 @@ const methodOverride = require('method-override');
 const app = express();
 const passport = require('passport');
 const falsh = require('express-flash');
-const initializePassport = require('./final/passportConfig');
+const initializePassport = require('./final/js/passportConfig');
+//const routs = require('./final/js/router');
 const flash = require('express-flash');
 const { rmSync } = require('fs');
-initializePassport(
-    passport,
-    email => data.findOne(user => user.email === email),
-    password => data.findOne(user => user.passport === password)
-)
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}));
@@ -72,15 +68,28 @@ app.get('/products', (req, res)=>{
 app.get('/about',(req,res)=>{
     res.render('about.ejs');
 })
-app.get('/login',checkNotAuthenticated,(req, res)=>{
+app.get('/login',(req, res)=>{
     res.render('login.ejs');
 })
-app.post('/login', passport.authenticate('local',{
-    successRedirect: '/index',
-    failureRedirect: '/login',
-    failureFlash: true
-}) )
-app.get('/register',checkNotAuthenticated,(req, res)=>{
+app.post('/login',async (req, res) =>{ 
+    try{
+
+    const email = req.body.email;
+    const password = await bcrypt.hash(req.body.password);
+
+    const useremail = await mydb.collection('users').findOne({ email: email})
+    if(useremail.password === password){
+        res.status(201).render('/index')
+    }
+    else{
+        res.redirect('/login')
+    }
+    } 
+    catch(error) {
+        res.status(400).redirect('/login')
+    }
+})
+app.get('/register',(req, res)=>{
     res.render('register.ejs')
 })
 app.get('/index',(req,res)=>{
@@ -93,7 +102,7 @@ app.get('/profile',checkNotAuthenticated, (req,res)=>{
     res.render('profile.ejs',{name: req.body.name});
 })
 // all form validations and cookie validations
-app.post('/register',checkNotAuthenticated, async (req, res)=>{    
+app.post('/register', async (req, res)=>{    
    let firstName = req.body.firstName;
    let lastName = req.body.lastName;
    let email = req.body.email;
@@ -113,7 +122,7 @@ app.post('/register',checkNotAuthenticated, async (req, res)=>{
        }
       console.log("Database is connected")
    });
-   return res.redirect('/login')
+   return res.redirect('/login');
 })
 
 // Shows the weather inside a Frame
@@ -147,18 +156,6 @@ app.delete('/logout', (req, res) =>{
     res.redirect('/login')
 })
 
-function checkAuthenticated(req, res, next){
-    if(req.isAuthenticated()) {
-        return next()
-    }
-    res.redirect('/login')
-}
-function checkNotAuthenticated(req, res, next){
-    if(req.isAuthenticated()) {
-       return res.redirect('/')
-    }
-    next()
-}
 
 app.listen(port, ()=>{
     console.log(`Server is listening on http://localhost:${port}`);
