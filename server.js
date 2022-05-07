@@ -15,8 +15,8 @@ const methodOverride = require('method-override');
 const app = express();
 const passport = require('passport');
 const falsh = require('express-flash');
-const initializePassport = require('./final/js/passportConfig');
-//const routs = require('./final/js/router');
+const {findOne, create} = require('./final/js/userCont')
+const routs = require('./final/js/routes');
 const flash = require('express-flash');
 const { rmSync } = require('fs');
 
@@ -65,6 +65,18 @@ app.get('/', (req, res )=>{
 app.get('/products', (req, res)=>{
     res.render('products.ejs');
 })
+app.post('/products', (req, res)=>{
+    const search = req.body.search;
+    switch(search){
+        case "sofa": res.redirect('/LeatherSofa');break;
+        case "about": res.redirect('/about'); break;
+        case "home": res.redirect('/index'); break;
+
+        default:break;
+    }
+
+})
+
 app.get('/about',(req,res)=>{
     res.render('about.ejs');
 })
@@ -72,22 +84,25 @@ app.get('/login',(req, res)=>{
     res.render('login.ejs');
 })
 app.post('/login',async (req, res) =>{ 
-    try{
+    const email = req.body.username;
+    const password = req.body.password;
+    /*
+    User.findOne({email: email},function(err,userCont){
+        if(err){
+            console.log(err);
+        }
+        else{
+            if(userCont){
+                bcrypt.compare(password, userCont.password, function(error, result) {
+                    if(result===true){
+                        res.render("/index");
+                    }       
+                });
+            }
+        }
+    });*/
+    findOne(req, res)
 
-    const email = req.body.email;
-    const password = await bcrypt.hash(req.body.password);
-
-    const useremail = await mydb.collection('users').findOne({ email: email})
-    if(useremail.password === password){
-        res.status(201).render('/index')
-    }
-    else{
-        res.redirect('/login')
-    }
-    } 
-    catch(error) {
-        res.status(400).redirect('/login')
-    }
 })
 app.get('/register',(req, res)=>{
     res.render('register.ejs')
@@ -98,11 +113,17 @@ app.get('/index',(req,res)=>{
 app.get('/ifram',(req,res)=>{
     res.render('ifram.ejs');
 })
-app.get('/profile',checkNotAuthenticated, (req,res)=>{
-    res.render('profile.ejs',{name: req.body.name});
+app.get('/profile', (req,res)=>{
+    res.render('profile.ejs',
+    {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName
+    });
 })
 // all form validations and cookie validations
-app.post('/register', async (req, res)=>{    
+app.post('/register', async (req, res)=>{  
+create(req, res);
+/*
    let firstName = req.body.firstName;
    let lastName = req.body.lastName;
    let email = req.body.email;
@@ -123,7 +144,9 @@ app.post('/register', async (req, res)=>{
       console.log("Database is connected")
    });
    return res.redirect('/login');
+   */
 })
+
 
 // Shows the weather inside a Frame
 app.post('/weather',(req,res)=>{
