@@ -107,7 +107,15 @@ app.get('/profile', (req,res)=>{
 })
 // all form validations and cookie validations
 app.post('/register', async (req, res)=>{  
+    const password = req.body.password
+    const confirmPassword = req.body.confirmPassword
+
+    if(password === confirmPassword){
         create(req, res)
+    }
+    else{
+        res.send("please enter the same password")
+    }
 
 })
 
