@@ -7,19 +7,18 @@ let schema = new mongoose.Schema({
     },
     firstName: {
         type: String,
+        required: true,
         default: ''
-    },
-    lastName:  {
-       type: String,
-       default: ''
     },
     password: {
         type: String,
+        required:true
     },
     confirmPassword: {
         type: String,
+        required: true
     }
     
 });
-let userModel = new mongoose.model('User', schema);
+const userModel = new mongoose.model('User', schema);
 module.exports = userModel;

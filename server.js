@@ -84,29 +84,14 @@ app.get('/login',(req, res)=>{
     res.render('login.ejs');
 })
 app.post('/login',async (req, res) =>{ 
-    const email = req.body.username;
-    const password = req.body.password;
-    /*
-    User.findOne({email: email},function(err,userCont){
-        if(err){
-            console.log(err);
-        }
-        else{
-            if(userCont){
-                bcrypt.compare(password, userCont.password, function(error, result) {
-                    if(result===true){
-                        res.render("/index");
-                    }       
-                });
-            }
-        }
-    });*/
+
     findOne(req, res)
 
 })
-app.get('/register',(req, res)=>{
+/*app.get('/register',(req, res)=>{
     res.render('register.ejs')
 })
+*/
 app.get('/index',(req,res)=>{
     res.render('index.ejs');
 })
@@ -122,29 +107,8 @@ app.get('/profile', (req,res)=>{
 })
 // all form validations and cookie validations
 app.post('/register', async (req, res)=>{  
-create(req, res);
-/*
-   let firstName = req.body.firstName;
-   let lastName = req.body.lastName;
-   let email = req.body.email;
-   let password = await bcrypt.hash(req.body.password, 10);
-   let confirmPassword = await bcrypt.hash(req.body.confirmPassword, 10);
+        create(req, res)
 
-   var data = {
-       "FirstName": firstName,
-       "LastName": lastName,
-       "Email": email,
-       "password": password,
-       "ConfrimPassword": confirmPassword
-   }
-   mydb.collection('users').insertOne(data, (err, collection)=>{
-       if(err){
-           throw err;
-       }
-      console.log("Database is connected")
-   });
-   return res.redirect('/login');
-   */
 })
 
 
