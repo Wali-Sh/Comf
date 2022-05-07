@@ -7,7 +7,7 @@ exports.create = async (req, res) => {
         res.status(400).render('results', {mydata: "Content can not be empty!"})
     }
 
-    const user = new userModel({
+    const user = new UserModel({
         email: req.body.email,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -17,7 +17,7 @@ exports.create = async (req, res) => {
     await user.save().then(data => {
         res.redirect('/login')
     }).catch(err => {
-        res.render('results', {mydata: err.message || "Some error occurred while creating user"})
+        res.render('/register', {mydata: err.message || "Some error occurred while creating user"})
     });
 }
 exports.findOne = async (req, res) => {
@@ -30,3 +30,18 @@ exports.findOne = async (req, res) => {
         res.status(404).redirect('/login', {mydata: error.message})
     }
 };
+/* by id
+exports.findOne = async (req, res) => {
+    try {
+        const user = await UserModel.findOne({email: req.query.email}).exec(); //change params to query
+        //const user = await UserModel.findById(req.query.id); //change params to query
+        //res.status(200).json(user);
+        res.status(200).render('results', {mydata: "user :"+ user.firstName +" "
+                + user.lastName +" "+ user.email +" "+ user.phone
+        })
+    } catch(error) {
+        //res.status(404).json({ message: error.message});
+        res.status(404).render('results', {mydata: error.message})
+    }
+};
+*/
