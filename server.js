@@ -5,6 +5,7 @@ if(process.env.NODE_ENV !== 'production'){
 const express = require('express');
 const layouts = require('express-ejs-layouts');
 const https = require('https');
+const http = require('http');
 const bodyParser = require('body-parser');
 const {response} = require("express");
 const cookiesPaser = require('cookie-parser');
@@ -19,6 +20,7 @@ const {findOne, create} = require('./final/js/userCont')
 const routs = require('./final/js/routes');
 const flash = require('express-flash');
 const { rmSync } = require('fs');
+const request = require('request')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}));
@@ -142,10 +144,47 @@ app.post('/weather',(req,res)=>{
             res.send()
         })
     })
-
-
 })
- 
+
+app.post('/curency', (req, res) => {
+    let curencies = req.body.curency
+    let apiKey = "d1bb088754717d83e0298584195902fe"
+    let url = "http://api.currencylayer.com/live?access_key="+apiKey+"&currencies="+curencies+"&source=USD&format=json"
+
+    http.get(url, ( response) => {
+        response.on('data', (chunk) => {
+            let json = JSON.parse(chunk);
+            let result = json.quotes
+            console.log(req.body)
+            res.send(result)
+        })
+    })
+})
+
+app.post('/checkCard', (req, res) => {
+    const cardNumber = req.body.cardNumber;
+    const apiKey = "473bd83fa1778ab52448aefb9c0aeaf1441bff31"
+    const url = "https://api.bintable.com/v1/"+cardNumber+"?api_key="+apiKey+""
+
+    https.get(url, (response) => {
+        response.on('data', (data) => {
+            let json = JSON.parse(data)
+            let cardType= json.data.card.scheme;
+            let countryName = json.data.country.name;
+            let flag = json.data.country.flag;
+            let bankName = json.data.bank.name;
+            let currency = json.data.country.currency;
+
+            res.write("<h3>card type is: "+cardType+"<br/>");
+            res.write("<h3>Country: "+countryName+"<br/>");
+            res.write("<h3>Country flag: "+flag+"<br/>");
+            res.write("<h3>Bank Name: "+bankName+"<br/>");
+            res.write("<h3>Country currency: "+currency+"<br/>");
+            res.send()
+        })
+    })
+})
+
 app.delete('/logout', (req, res) =>{
     req.logOut()
     res.redirect('/login')
