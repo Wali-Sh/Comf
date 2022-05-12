@@ -9,6 +9,9 @@
   },
   "author": "Shokrullah, Reza, Shokoor, Mahdi",
   "license": "ISC",
+  "engines": {
+    "node": "17.8.0"
+  },
   "dependencies": {
     "@googleapis/docs": "^0.4.1",
     "bcrypt": "^5.0.1",
