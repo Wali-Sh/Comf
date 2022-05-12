@@ -1,6 +1,6 @@
 const express = require('express');
-const UserController = require('./userCont');
-const productCont = require('./prodController');
+const UserController = require('../controlers/userCont');
+const productCont = require('../controlers/prodController');
 const router = express.Router();
 
 router.post('/login', UserController.findOne);

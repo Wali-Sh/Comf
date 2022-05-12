@@ -1,4 +1,4 @@
-const addproducts = require('./prodModle')
+const addproducts = require('../modles/prodModle')
 
 exports.create = async (req, res) => {
     if (!req.body.email && !req.body.productName && !req.body.color && !req.body.company) {
