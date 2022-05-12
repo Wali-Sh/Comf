@@ -16,8 +16,8 @@ const methodOverride = require('method-override');
 const app = express();
 const passport = require('passport');
 const falsh = require('express-flash');
-const {findOne, create} = require('./final/js/userCont')
-const routs = require('./final/js/routes');
+const {findOne, create} = require('./controlers/userCont')
+const routs = require('./routs/routes');
 const flash = require('express-flash');
 const { rmSync } = require('fs');
 const request = require('request')
@@ -43,7 +43,7 @@ mongodb.connect('mongodb+srv://Wali:Wali1078$@cluster0.xeeua.mongodb.net/comfy?r
 })
 const mydb = mongodb.connection;
 mydb.on('error', () => console.log('Error in connecting to Database'))
-mydb.once('open',()=> console.log('connected'))
+mydb.once('open',()=> console.log('Database is connected!!'))
 
 let port = process.env.PORT;
 if (port == null || port == "") {
@@ -52,7 +52,7 @@ if (port == null || port == "") {
 
 
 // all usages of express
-app.use(express.static('final'));
+app.use(express.static('public'));
 app.use('/css', express.static(__dirname+ '/css'));
 app.use('/css', express.static(__dirname+ '/css'));
 app.use('/css', express.static(__dirname+ '/css'));

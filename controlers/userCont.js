@@ -1,4 +1,4 @@
-const UserModel = require('./userModle')
+const UserModel = require('../modles/userModle')
 const bcrypt = require('bcrypt')
 // Create and Save a new user
 exports.create = async (req, res) => {
