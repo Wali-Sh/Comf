@@ -120,7 +120,67 @@ app.post('/register', async (req, res)=>{
     }
 
 })
+app.get('/form', function(req, res) {
+    res.render('form.ejs')
+})
+app.get('/confirmation', function(req, res) {
+    res.render('confirmation.ejs')
+})
+app.post('/checkout', function(req, res) {
+    res.render('form.ejs');
+})
+app.post('/paymentMethod', function(req, res){
+    sofaColor= req.body.color,
+     deskColor= req.body.deskcolor,
+     firstName=req.body.firstName,
+     lastName= req.body.lastName,
+     username= req.body.username,
+     emale= req.body.email,
+     address= req.body.address,
+     phone= req.body.phone,
+     country= req.body.region,
+     city= req.body.city,
+     zipCode= req.body.zip,
+     saveInfo= req.body.saveInfo,
+     callInfo= req.body.callInfo,
+     leaveInfo= req.body.leaveInfo,
+     info= req.body.info,
+     visa=req.body.visa,
+     masterCard= req.body.masterCard,
+     paypal= req.body.paypal,
+     formControl= req.body.formControl,
+     ccNumber= req.body.ccNumber,
+     ccExpiration= req.body.ccExpiration,
+     cvv= req.body.cvv,
+    res.redirect('/confirmation', 
+    {
+     sofaColor: sofaColor,
+     deskColor:deskColor,
+     firstName:firstName,
+     lastName:lastName,
+     username:username,
+     emale: emale,
+     address:address,
+     phone:phone,
+     country:country,
+     city:city,
+     zipCode: zipCode,
+     saveInfo:saveInfo,
+     callInfo:callInfo,
+     leaveInfo: leaveInfo,
+     info:info,
+     visa:visa,
+     masterCard: masterCard,
+     paypal:paypal,
+     formControl: formControl,
+     ccNumber: ccNumber,
+     ccExpiration:ccExpiration,
+     cvv: cvv,
 
+    }
+
+    );
+})
 
 // Shows the weather inside a Frame
 app.post('/weather',(req,res)=>{
