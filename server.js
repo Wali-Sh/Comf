@@ -152,7 +152,7 @@ app.post('/paymentMethod', function(req, res){
      ccNumber= req.body.ccNumber,
      ccExpiration= req.body.ccExpiration,
      cvv= req.body.cvv,
-    res.redirect('/confirmation', 
+    res.render('/confirmation.ejs', 
     {
      sofaColor: sofaColor,
      deskColor:deskColor,
