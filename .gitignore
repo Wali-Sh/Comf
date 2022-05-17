@@ -1,3 +1,9 @@
+#stop creating files like these
+/node_modules
+npm-debug.log
+.DS_Store
+/*.env 
+
 # Logs
 logs
 *.log
@@ -103,8 +109,4 @@ dist
 # TernJS port file
 .tern-port
 
-#stop creating files like these
-/node_modules
-npm-debug.log
-.DS_Store
-/*.env
+ 
