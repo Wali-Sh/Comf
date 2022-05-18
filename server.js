@@ -15,7 +15,7 @@ const bcrypt = require('bcrypt');
 const methodOverride = require('method-override');
 const app = express();
 const passport = require('passport');
-const {findOne, create} = require('./controlers/userCont')
+const {login, register} = require('./controlers/userCont')
 const routs = require('./routs/routes');
 const flash = require('express-flash');
 const { rmSync } = require('fs');
@@ -24,7 +24,7 @@ const request = require('request')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.urlencoded({extended: false}));
-/*app.use(flash())
+app.use(flash())
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -33,7 +33,7 @@ app.use(session({
 
 app.use(passport.initialize())
 app.use(passport.session())
-*/
+
 app.use(methodOverride('_method'))
 
 
@@ -87,14 +87,9 @@ app.get('/login',(req, res)=>{
     res.render('login.ejs');
 })
 app.post('/login',async (req, res) =>{ 
-
-    findOne(req, res)
-
+   login(req, res)
 })
-/*app.get('/register',(req, res)=>{
-    res.render('register.ejs')
-})
-*/
+
 app.get('/index',(req,res)=>{
     res.render('index.ejs');
 })
@@ -102,11 +97,8 @@ app.get('/ifram',(req,res)=>{
     res.render('ifram.ejs');
 })
 app.get('/profile', (req,res)=>{
-    res.render('profile.ejs',
-    {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName
-    });
+
+    res.render('profile.ejs');
 })
 // all form validations and cookie validations
 app.post('/register', async (req, res)=>{  
@@ -114,22 +106,18 @@ app.post('/register', async (req, res)=>{
     const confirmPassword = req.body.confirmPassword
 
     if(password === confirmPassword){
-        create(req, res)
+        register(req, res)
     }
     else{
         res.send("please enter the same password")
     }
 
 })
-app.get('/form', function(req, res) {
-    res.render('form.ejs')
-})
-app.get('/confirmation', function(req, res) {
-    res.render('confirmation.ejs')
-})
+
 app.post('/checkout', function(req, res) {
     res.render('form.ejs');
 })
+
 app.post('/paymentMethod', function(req, res){
     sofaColor= req.body.color,
      deskColor= req.body.deskcolor,
@@ -153,7 +141,7 @@ app.post('/paymentMethod', function(req, res){
      ccNumber= req.body.ccNumber,
      ccExpiration= req.body.ccExpiration,
      cvv= req.body.cvv,
-    res.redirect('/confirmation', 
+    res.render('confirmation.ejs', 
     {
      sofaColor: sofaColor,
      deskColor:deskColor,
@@ -177,10 +165,7 @@ app.post('/paymentMethod', function(req, res){
      ccNumber: ccNumber,
      ccExpiration:ccExpiration,
      cvv: cvv,
-
-    }
-
-    );
+    });
 })
 
 // Shows the weather inside a Frame

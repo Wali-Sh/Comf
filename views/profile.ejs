@@ -1,8 +1,64 @@
-   <p>
-   <% firstName %> 
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/styles.css" />
+      <!-- normalize  -->
+    <link rel="stylesheet" href="./css/normalize.css" />
+    <!-- font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    />
+    <!-- main css -->
+    <link rel="stylesheet" href="./css/styles.css" />
+
+   </head>
+   <body>
+       <!-- navbar -->
+    <nav class="navbar page">
+      <div class="nav-center">
+        <!-- links -->
+        <div>
+          <button class="toggle-nav">
+            <i class="fas fa-bars"></i>
+          </button>
+          <ul class="nav-links">
+            <li>
+              <a href="index" class="nav-link"> home </a>
+            </li>
+            <li>
+              <a href="products" class="nav-link"> products </a>
+            </li>
+            <li>
+              <a href="about" class="nav-link"> about </a>
+            </li>
+          </ul>
+        </div>
+        <!-- logo -->
+        <img src="./assets/logo-black.svg" class="nav-logo" alt="logo" />
+        <!-- cart icon -->
+        <div class="toggle-container">
+          <button class="toggle-cart">
+            <i class="fas fa-shopping-cart"></i>
+          </button>
+          <span class="cart-item-count">1</span>
+        </div>
+        <a href="profile"><button>Profile</button></a>
+      </div>
+        </div>
+      </div>
+    </nav>
+    <!-- end of navbar-->
+   
+   <p> <%=firstName %> 
     <br>
-    <% lastName %>
+    <%=lastName %>
   </p>
     <form action="/logout?_method=DELETE" method="POST">
       <button class="fas fa-btn" type="submit">Log Out</button>
     </form>
+    </body>
+    </html>

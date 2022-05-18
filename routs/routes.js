@@ -3,6 +3,6 @@ const UserController = require('../controlers/userCont');
 const productCont = require('../controlers/prodController');
 const router = express.Router();
 
-router.post('/login', UserController.findOne);
-router.post('/register', UserController.create);
+router.post('/register', UserController.register);
+router.post('/login', UserController.login);
 module.exports = router;
