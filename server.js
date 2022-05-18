@@ -24,6 +24,7 @@ const request = require('request')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.urlencoded({extended: false}));
+/*
 app.use(flash())
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -35,7 +36,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.use(methodOverride('_method'))
-
+*/
 
 // database connection
 mongodb.connect('mongodb+srv://Wali:Wali1078$@cluster0.xeeua.mongodb.net/comfy?retryWrites=true&w=majority',{
