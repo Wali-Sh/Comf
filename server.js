@@ -236,7 +236,7 @@ app.post('/checkCard', (req, res) => {
 })
 
 app.delete('/logout', (req, res) =>{
-    req.logOut()
+    req.logout()
     res.redirect('/login')
 })
 
