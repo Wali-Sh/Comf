@@ -69,6 +69,9 @@ app.get('/', (req, res )=>{
 app.get('/products', (req, res)=>{
     res.render('products.ejs');
 })
+app.get('/single-products', (req, res)=>{
+    res.render('single-products.ejs');
+})
 app.post('/products', (req, res)=>{
     const search = req.body.search;
     switch(search){
