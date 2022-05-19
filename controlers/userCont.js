@@ -1,35 +1,52 @@
 const UserModel = require('../modles/userModle')
 const bcrypt = require('bcrypt')
+const {hash} = require("bcrypt");
 // Create and Save a new user
-exports.create = async (req, res) => {
-    if (!req.body.email && !req.body.firstName && !req.body.lastName && !req.body.password) {
-        //res.status(400).send({ message: "Content can not be empty!" });
-        res.status(400).render('results', {mydata: "Content can not be empty!"})
-    }
-
-    const user = new UserModel({
-        email: req.body.email,
-        firstName: req.body.fullName,
-        password: await bcrypt.hash(req.body.password,10),
-        confirmPassword: await bcrypt.hash(req.body.confirmPassword, 10)
-    });
-        await user.save().then(data => {
-            res.redirect('/login')
-        })
-        .catch(err => {
-            res.render('/register', {mydata: err.message || "Some error occurred while creating user"})
+exports.register = async (req, res) => {
+    //level 4
+    bcrypt.hash(req.body.password, 10, function(err, hash) {
+        const newUser = new UserModel({
+            email: req.body.email,
+            firstName: req.body.fullName,
+            password:hash,
+            confirmPassword: hash
+            
         });
-    }
-exports.findOne = async (req, res) => {
-    try {
-        const user = await UserModel.findOne({email: req.query.email}).exec(); 
-        const password = await UserModel.findOne({password: req.query.password}).exec();
-        res.redirect('/index');
-    } catch(error) {
-        //res.status(404).json({ message: error.message});
-        res.status(404).redirect('/login', {mydata: error.message})
-    }
+        newUser.save(function (err) {
+            if (err) {
+                console.log(err);
+            } else {
+                res.render("login.ejs");
+            }
+        });
+    })
+    //
 };
+    exports.login = async (req, res) => {
+        const email = req.body.email;
+        const password = req.body.password;
+        //const password = req.body.password;
+        //level 3
+        //const password = md5(req.body.password);
+        //
+    
+        UserModel.findOne({email: email}, function(err, foundUser){
+            if (err) {
+                res.redirect("/login")
+            } else {
+                if (foundUser) {
+                    bcrypt.compare(password, foundUser.password, function(err, result) {
+                        if(result===true) {
+                            res.render("index.ejs");
+                        }
+                    });
+                    /*if (foundUser.password === password) {
+                        res.render("secrets");
+                    }*/
+                }
+            }
+        })
+    }
 /* by id
 exports.findOne = async (req, res) => {
     try {

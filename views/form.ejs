@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.88.1">
+  <title>Checkout Form</title>
+  <!-- Bootstrap core CSS -->
+  <!-- main css -->
+   <!-- normalize  -->
+   <link rel="stylesheet" href="./css/normalize.css" />
+   <!-- font awesome -->
+   <link
+     rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+   />
+  <link rel="stylesheet" href="./css/styles.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body class="bg-light">
+  <!-- navbar -->
+  <nav class="navbar page">
+    <div class="nav-center">
+      <!-- links -->
+      <div>
+        <button class="toggle-nav">
+          <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links">
+          <li>
+            <a href="index" class="nav-link"> home </a>
+          </li>
+          <li>
+            <a href="products" class="nav-link"> products </a>
+          </li>
+          <li>
+            <a href="about" class="nav-link"> about </a>
+          </li>
+        </ul>
+      </div>
+      <!-- logo -->
+      <img src="./assets/logo-black.svg" class="nav-logo" alt="logo" />
+      <!-- cart icon -->
+      <div class="toggle-container">
+        <button class="toggle-cart">
+          <i class="fas fa-shopping-cart"></i>
+        </button>
+        <span class="cart-item-count">1</span>
+      </div>
+      <a href="profile"><button>Profile</button></a>
+    </div>
+      </div>
+    </div>
+  </nav>
+  <!-- end of navbar-->
+  <div class="container">
+    <main>
+      <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="../public/assets/logo-black.svg">
+        <h2>Checkout form</h2>
+      </div>
+
+      <div class="row g-5">
+        <div class="col-md-5 col-lg-4 order-md-last">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-primary">Your cart</span>
+            <span class="badge bg-primary rounded-pill">3</span>
+          </h4>
+          <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+              <form  action="/paymentMethod" method="post">
+
+
+              <div>
+                <h6 class="my-0">Sofa</h6>
+                <small class="text-muted">cotton, plastic.</small>
+                <select class="form-select form-select-sm" name="color">
+                  <option selected>choose color</option>
+                  <option value="white">white</option>
+                  <option value="black">black</option>
+                  <option value="green">green</option>
+                </select>
+              </div>
+              <span class="text-muted">$12</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+              <div>
+                <h6 class="my-0">Desk</h6>
+                <small class="text-muted"> Wood</small>
+                <select class="form-select form-select-sm" name="deskColor">
+                  <option selected>choose color</option>
+                  <option value="white">white</option>
+                  <option value="black">black</option>
+                  <option value="green">green</option>
+                </select>
+              </div>
+              <span class="text-muted">$8</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+              <div>
+                <h6 class="my-0">sheet</h6>
+                <small class="text-muted">black, cotton</small>
+              </div>
+              <span class="text-muted">$5</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between bg-light">
+              <div class="text-success">
+                <h6 class="my-0">Promo code</h6>
+                <small>EXAMPLECODE</small>
+              </div>
+              <span class="text-success">−$5</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Total (USD)</span>
+              <strong>$20</strong>
+            </li>
+          </ul>
+
+        </div>
+        <div class="col-md-7 col-lg-8">
+          <h4 class="mb-3">Address</h4>
+
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label class="form-label">First name</label>
+                <input type="text" class="form-control" name="firstName" required>
+                <div class="invalid-feedback">
+                  Valid first name is required.
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <label for="lastName" class="form-label">Last name</label>
+                <input type="text" class="form-control" name="lastName" required>
+                <div class="invalid-feedback">
+                  Valid last name is required.
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">Username</label>
+                <div class="input-group has-validation">
+                  <span class="input-group-text">@</span>
+                  <input type="text" class="form-control" name="username" placeholder="Username" required>
+                  <div class="invalid-feedback">
+                    Your username is required.
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">Email <span class="text-muted">(Optional)</span></label>
+                <input type="email" class="form-control" name="email" placeholder="you@example.com">
+                <div class="invalid-feedback">
+                  Please enter a valid email address for shipping updates.
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">Address</label>
+                <input type="text" class="form-control" name="address" placeholder="1234 Main St" required>
+                <div class="invalid-feedback">
+                  Please enter your shipping address.
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">Phone <span class="text-muted">You will receive a call before shipping</span></label>
+                <input type="text" class="form-control" name="phone" placeholder="EX: (123) 456-7890">
+              </div>
+
+              <div class="col-md-5">
+                <label for="country" class="form-label">Country</label>
+                <select class="form-select" name="region" required>
+                  <option value="">Choose...</option>
+                  <option value="United States">United States</option>
+                  <option value="Kazakshtan">Kazakshtan</option>
+                  <option value="France">France</option>
+                  <option value="Germany">Germany</option>
+                </select>
+                <div class="invalid-feedback">
+                  Please select a valid country.
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">City</label>
+                <select class="form-select" name="city" required>
+                  <option value="">Choose...</option>
+                  <option value="Taldykorgan">Taldykorgan</option>
+                  <option value="Astana">Astana</option>
+                  <option value="Kyzylorda">Kyzylorda</option>
+                  <option value="Taraz">Taraz</option>
+                </select>
+                <div class="invalid-feedback">
+                  Please provide a valid state.
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <label for="zip" class="form-label">Zip</label>
+                <input type="text" class="form-control" name="zip" placeholder="" required>
+                <div class="invalid-feedback">
+                  Zip code required.
+                </div>
+              </div>
+            </div>
+
+            <hr class="my-4">
+            
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" name="saveInfo" value="Save this information for next time">
+              <label class="form-check-label" for="save-info">Save this information for next time</label>
+            </div>
+
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" name="callInfo" value="Call before shipping">
+              <label class="form-check-label" for="save-info">Call before delivery</label>
+            </div>
+
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" name="leaveInfo" value="Leave behind the door">
+              <label class="form-check-label" for="save-info">Leave behind the door</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" name="info" value="Leave it to consirge">
+              <label class="form-check-label" for="save-info">Leave it to consirge </label>
+            </div>
+
+            <hr class="my-4">
+
+            <h4 class="mb-3">Payment</h4>
+
+            <div class="my-3">
+              <div class="form-check">
+                <input id="credit" name="visa" type="radio" class="form-check-input" checked  value="Visa">
+                <label class="form-check-label" for="credit">Visa</label>
+              </div>
+              <div class="form-check">
+                <input id="debit" name="masterCard" type="radio" class="form-check-input" value="MasterCard">
+                <label class="form-check-label" for="debit">MasterCard</label>
+              </div>
+              <div class="form-check">
+                <input id="paypal" name="paypal" type="radio" class="form-check-input" value="PayPal">
+                <label class="form-check-label" for="paypal">PayPal</label>
+              </div>
+            </div>
+
+            <div class="row gy-3">
+              <div class="col-md-6">
+                <label for="cc-name" class="form-label">Name on card</label>
+                <input type="text" class="form-control" name="formControl" id="cc-name" placeholder="" required>
+                <small class="text-muted">Full name as displayed on card</small>
+                <div class="invalid-feedback">
+                  Name on card is required
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="cc-number" class="form-label">Credit card number</label>
+                <input type="number" class="form-control" name="ccNumber" id="cc-number" placeholder="" required>
+                <div class="invalid-feedback">
+                  Credit card number is required
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <label for="cc-expiration" class="form-label">Expiration</label>
+                <input type="text" class="form-control" name="ccExpiration" id="cc-expiration" placeholder="" required>
+                <div class="invalid-feedback">
+                  Expiration date required
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <label for="cc-cvv" class="form-label">CVV</label>
+                <input type="text" class="form-control" name="cvv" id="cc-cvv" placeholder="" required>
+                <div class="invalid-feedback">
+                  Security code required
+                </div>
+              </div>
+            </div>
+
+            <hr class="my-4">
+            <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+            
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+      <p class="mb-1">&copy; 2022 Comfy</p>
+    </footer>
+  </div>
+</body>
+
+</html>

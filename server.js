@@ -15,8 +15,7 @@ const bcrypt = require('bcrypt');
 const methodOverride = require('method-override');
 const app = express();
 const passport = require('passport');
-const falsh = require('express-flash');
-const {findOne, create} = require('./controlers/userCont')
+const {login, register} = require('./controlers/userCont')
 const routs = require('./routs/routes');
 const flash = require('express-flash');
 const { rmSync } = require('fs');
@@ -25,16 +24,19 @@ const request = require('request')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.urlencoded({extended: false}));
+/*
 app.use(flash())
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false
 }))
+
 app.use(passport.initialize())
 app.use(passport.session())
-app.use(methodOverride('_method'))
 
+app.use(methodOverride('_method'))
+*/
 
 // database connection
 mongodb.connect('mongodb+srv://Wali:Wali1078$@cluster0.xeeua.mongodb.net/comfy?retryWrites=true&w=majority',{
@@ -67,6 +69,9 @@ app.get('/', (req, res )=>{
 app.get('/products', (req, res)=>{
     res.render('products.ejs');
 })
+app.get('/single-product', (req, res)=>{
+    res.render('single-product.ejs');
+})
 app.post('/products', (req, res)=>{
     const search = req.body.search;
     switch(search){
@@ -86,14 +91,9 @@ app.get('/login',(req, res)=>{
     res.render('login.ejs');
 })
 app.post('/login',async (req, res) =>{ 
-
-    findOne(req, res)
-
+   login(req, res)
 })
-/*app.get('/register',(req, res)=>{
-    res.render('register.ejs')
-})
-*/
+
 app.get('/index',(req,res)=>{
     res.render('index.ejs');
 })
@@ -101,11 +101,8 @@ app.get('/ifram',(req,res)=>{
     res.render('ifram.ejs');
 })
 app.get('/profile', (req,res)=>{
-    res.render('profile.ejs',
-    {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName
-    });
+
+    res.render('profile.ejs');
 })
 // all form validations and cookie validations
 app.post('/register', async (req, res)=>{  
@@ -113,7 +110,7 @@ app.post('/register', async (req, res)=>{
     const confirmPassword = req.body.confirmPassword
 
     if(password === confirmPassword){
-        create(req, res)
+        register(req, res)
     }
     else{
         res.send("please enter the same password")
@@ -121,6 +118,59 @@ app.post('/register', async (req, res)=>{
 
 })
 
+app.post('/checkout', function(req, res) {
+    res.render('form.ejs');
+})
+
+app.post('/paymentMethod', function(req, res){
+    sofaColor= req.body.color,
+     deskColor= req.body.deskcolor,
+     firstName=req.body.firstName,
+     lastName= req.body.lastName,
+     username= req.body.username,
+     emale= req.body.email,
+     address= req.body.address,
+     phone= req.body.phone,
+     country= req.body.region,
+     city= req.body.city,
+     zipCode= req.body.zip,
+     saveInfo= req.body.saveInfo,
+     callInfo= req.body.callInfo,
+     leaveInfo= req.body.leaveInfo,
+     info= req.body.info,
+     visa=req.body.visa,
+     masterCard= req.body.masterCard,
+     paypal= req.body.paypal,
+     formControl= req.body.formControl,
+     ccNumber= req.body.ccNumber,
+     ccExpiration= req.body.ccExpiration,
+     cvv= req.body.cvv,
+    res.render('confirmation.ejs', 
+    {
+     sofaColor: sofaColor,
+     deskColor:deskColor,
+     firstName:firstName,
+     lastName:lastName,
+     username:username,
+     emale: emale,
+     address:address,
+     phone:phone,
+     country:country,
+     city:city,
+     zipCode: zipCode,
+     saveInfo:saveInfo,
+     callInfo:callInfo,
+     leaveInfo: leaveInfo,
+     info:info,
+     visa:visa,
+     masterCard: masterCard,
+     paypal:paypal,
+     formControl: formControl,
+     ccNumber: ccNumber,
+     ccExpiration:ccExpiration,
+     cvv: cvv,
+    });
+})
 
 // Shows the weather inside a Frame
 app.post('/weather',(req,res)=>{
@@ -186,7 +236,7 @@ app.post('/checkCard', (req, res) => {
 })
 
 app.delete('/logout', (req, res) =>{
-    req.logOut()
+    req.logout()
     res.redirect('/login')
 })
 

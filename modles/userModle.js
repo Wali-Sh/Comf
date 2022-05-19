@@ -8,7 +8,7 @@ let schema = new mongoose.Schema({
     firstName: {
         type: String,
         required: true,
-        default: ''
+        unique: true
     },
     password: {
         type: String,
