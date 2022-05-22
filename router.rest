@@ -13,12 +13,12 @@ Content-Type: application/json
 
 {
     "name": "Shokrullah Wali",
-    "subscribedToChannel": "Shokran"
+    "subscribedToChannel": "Comfy"
 }
 
 ###
 //delete subscribers
-DELETE http://localhost:3000/subscribers/6289cb94a9a5acce30ce7f6d
+DELETE http://localhost:3000/subscribers/6289d5287b5c6bf4315012d9
 
 ###
 //update a subscriber

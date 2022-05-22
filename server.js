@@ -22,10 +22,7 @@ const { rmSync } = require('fs');
 const request = require('request')
 const userModle = require('./modles/userModle')
 const subscribers = require('./routs/subscribers')
-
-app.use(express.json())
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.urlencoded({extended: false}));
+const adminRout = require('./routs/admin.router')
 
 app.set('view-engine', 'ejs');
 /*
@@ -65,13 +62,15 @@ app.use('/img',express.static(__dirname+'/img'));
 app.use('/js', express.static(__dirname+ '/js'));
 app.use(cookiesPaser());
 app.use('/subscribers', subscribers)
+app.use('/admin', adminRout)
+app.use(express.json())
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.urlencoded({extended: false}));
 // all routes
 app.get('/', (req, res )=>{
     res.render('index.ejs');
 })
-app.get('/admin', (req, res)=>{
-    res.render('admin.ejs');
-})
+ 
 app.get('/products', (req, res)=>{
     res.render('products.ejs');
 })
