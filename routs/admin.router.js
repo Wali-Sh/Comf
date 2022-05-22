@@ -10,8 +10,8 @@ const adminBro = new AdminBro({
   rootPath: '/admin',
 })
 const ADMIN = {
-    email: process.env.ADMIN_EMAIL || 'Shokrullahw8@gmail.com',
-    password: process.env.ADMIN_PASSWORD || 'Wali1078$',
+    email:  'Shokrullahw8@gmail.com',
+    password: 'Wali1078$'
 }
 
 const router = AdminBroExpress.buildAuthenticatedRouter(adminBro,{
@@ -21,7 +21,7 @@ const router = AdminBroExpress.buildAuthenticatedRouter(adminBro,{
         if(email === ADMIN.email && password === ADMIN.password){
             return ADMIN;
         }
-        return null;    
+        return null;  
     }
 })
 
