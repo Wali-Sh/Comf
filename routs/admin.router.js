@@ -5,7 +5,6 @@ const mongodb = require('mongoose')
 
 AdminBro.registerAdapter(AdminBroMongoose)
 
-
 const adminBro = new AdminBro({
   databases: [mongodb],
   rootPath: '/admin',
