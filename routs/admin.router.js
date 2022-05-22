@@ -10,7 +10,7 @@ const adminBro = new AdminBro({
   rootPath: '/admin',
 })
 const ADMIN = {
-    email:  'Shokrullahw8@gmail.com',
+    email:  'shokrullahw8@gmail.com',
     password: 'Wali1078$'
 }
 
