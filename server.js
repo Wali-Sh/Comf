@@ -20,13 +20,17 @@ const routs = require('./routs/routes');
 const flash = require('express-flash');
 const { rmSync } = require('fs');
 const request = require('request')
+const userModle = require('./modles/userModle')
+const subscribers = require('./routs/subscribers')
 
-app.use(bodyParser.json())
+app.use(express.json())
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.urlencoded({extended: false}));
+
+app.set('view-engine', 'ejs');
 /*
 app.use(flash())
-app.use(session({
+app.use(session({ 
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false
@@ -34,12 +38,11 @@ app.use(session({
 
 app.use(passport.initialize())
 app.use(passport.session())
-
-app.use(methodOverride('_method'))
 */
+app.use(methodOverride('_method'))
 
 // database connection
-mongodb.connect('mongodb+srv://Wali:Wali1078$@cluster0.xeeua.mongodb.net/comfy?retryWrites=true&w=majority',{
+mongodb.connect(process.env.DATABASE_URL,{
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -60,11 +63,14 @@ app.use('/css', express.static(__dirname+ '/css'));
 app.use('/css', express.static(__dirname+ '/css'));
 app.use('/img',express.static(__dirname+'/img'));
 app.use('/js', express.static(__dirname+ '/js'));
-app.set('view-engine', 'ejs');
 app.use(cookiesPaser());
+app.use('/subscribers', subscribers)
 // all routes
 app.get('/', (req, res )=>{
     res.render('index.ejs');
+})
+app.get('/admin', (req, res)=>{
+    res.render('admin.ejs');
 })
 app.get('/products', (req, res)=>{
     res.render('products.ejs');
@@ -90,7 +96,7 @@ app.get('/about',(req,res)=>{
 app.get('/login',(req, res)=>{
     res.render('login.ejs');
 })
-app.post('/login',async (req, res) =>{ 
+app.post('/login',async (req, res) =>{
    login(req, res)
 })
 
@@ -101,11 +107,25 @@ app.get('/ifram',(req,res)=>{
     res.render('ifram.ejs');
 })
 app.get('/profile', (req,res)=>{
-
-    res.render('profile.ejs');
+    /*
+    userModle.find({}, function(err, User){
+        if(err){
+             res.send("an error accured!")
+        }
+        else(User)=>{
+           res.render('profile', {users: User});
+        }
+    })
+    */
+    res.render('profile.ejs',{
+        fullName: "Shokrullah Wali",
+        email:"shokrullahw8@gmail.com",
+        phone: "+7 705 131 6624"
+    });
 })
 // all form validations and cookie validations
-app.post('/register', async (req, res)=>{  
+app.post('/register', async (req, res)=>{
+     
     const password = req.body.password
     const confirmPassword = req.body.confirmPassword
 
@@ -236,7 +256,7 @@ app.post('/checkCard', (req, res) => {
 })
 
 app.delete('/logout', (req, res) =>{
-    req.logout()
+    req.logOut()
     res.redirect('/login')
 })
 

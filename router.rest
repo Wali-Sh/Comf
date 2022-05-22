@@ -1,0 +1,31 @@
+// get all subscribers
+GET  http://localhost:3000/subscribers
+
+###
+// get one subscriber
+GET  http://localhost:3000/subscribers/6289cb94a9a5acce30ce7f6d
+
+
+###
+//add subscribers
+POST http://localhost:3000/subscribers
+Content-Type: application/json
+
+{
+    "name": "Shokrullah Wali",
+    "subscribedToChannel": "Shokran"
+}
+
+###
+//delete subscribers
+DELETE http://localhost:3000/subscribers/6289cb94a9a5acce30ce7f6d
+
+###
+//update a subscriber
+PATCH http://localhost:3000/subscribers/6289cb94a9a5acce30ce7f6d
+Content-Type: application/json
+
+{
+    "name": "Shookor Amini",
+    "subscribedToChannel": "TechnoDom"
+}

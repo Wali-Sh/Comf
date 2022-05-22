@@ -15,8 +15,9 @@ exports.register = async (req, res) => {
         newUser.save(function (err) {
             if (err) {
                 console.log(err);
+                res.redirect('/register')
             } else {
-                res.render("login.ejs");
+                res.render("index.ejs");
             }
         });
     })
