@@ -25,7 +25,6 @@ const subscribers = require('./routs/subscribers')
 const adminRout = require('./routs/admin.router')
 
 app.set('view-engine', 'ejs');
-/*
 app.use(flash())
 app.use(session({ 
     secret: process.env.SESSION_SECRET,
@@ -35,7 +34,6 @@ app.use(session({
 
 app.use(passport.initialize())
 app.use(passport.session())
-*/
 app.use(methodOverride('_method'))
 
 // database connection
