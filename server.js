@@ -39,7 +39,7 @@ app.use(methodOverride('_method'))
 */
 
 // database connection
-mongodb.connect(process.env.DATABASE_URL,{
+mongodb.connect('mongodb+srv://Wali:Wali1078$@cluster0.xeeua.mongodb.net/comfy?retryWrites=true&w=majority',{
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
