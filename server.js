@@ -13,14 +13,45 @@ const adminRout = require('./routs/admin.router')
 const swaggerJsDoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
 const userAthentication = require('./routs/routes')
-const subscriber = require('./routs/subscribe')
+const subscriber = require('./routs/subscribers')
 
 let port = process.env.PORT;
 if (port == null || port == "") {
     port = 3000;
 }
+const swaggerOptions = {
+    swaggerDefinition: {
+        info:{
+            title: 'Subscribers API',
+            description: 'creat, get, update, and delete subscribers',
+            version: '1.0.0',
+            contact:{
+                email: "Shokrullahw8@gmail.com"
+            },
+                servers: [
+                    {
+                    url:'https://localhost:3000'
+                    } 
+                ],
+            components:{
+                bearerAuth: {
+                    type: "http",
+                    scheme: "bearer",
+                    bearerFormat: "JWT",
+                }
+            },
+            security:[
+                {
+                    bearerAuth: [],
+                }
+            ]
+        }
 
-
+    },
+    apis: ['./routs/subscribers.js']
+}
+const swaggerDoc = swaggerJsDoc(swaggerOptions)
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc))
 
 
 app.set('view-engine', 'ejs');
@@ -62,7 +93,7 @@ app.use(express.json())
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.urlencoded({extended: false}));
 app.use(userAthentication)
-app.use('/subscribers',subscriber)
+app.use('/subscribers', subscriber)
 // all routes
 app.get('/', (req, res )=>{
     res.render('index.ejs');
