@@ -1,45 +1,74 @@
-const addproducts = require('../modles/prodModle')
+const router = require("express").Router();
+const product = require("../modles/prodModle");
+const { verifyToken } = require("../controlers/validation");
 
-exports.create = async (req, res) => {
-    if (!req.body.email && !req.body.productName && !req.body.color && !req.body.company) {
-        //res.status(400).send({ message: "Content can not be empty!" });
-        res.status(400).render('/addproducts', { mydata: "Content can not be empty!" })
-    }
+// Create new product
+router.post("/products", verifyToken, (req, res) => {
+//router.post("/", (req, res) => {
+    const data = req.body;
+    product.insertMany(data)
+        .then(data => { res.status(201).send(data); })
+        .catch(err => { res.status(500).send({ message: err.message }); });
+});
 
-    const product = new addproducts({
-        productName: req.body.product,
-        color: req.body.color,
-        company: req.body.company
-    });
+router.get("/products", (req, res) => {
+    //advanced query by name
+    const name = req.query.name;
+ 
+    var condition = name ? { name: { $regex: new RegExp(name), $options: "i" } } : {};
+    product.find(condition)
+        .then(data => { res.send(data); })
+        .catch(err => { res.status(500).send({ message: err.message }); });
+});
 
-    await product.save().then(data => {
-        /*res.send({
-            message:"User created successfully!!",
-            user:data
-        });*/
-        res.render('/result', { mydata: "produts" + data.productName + " created succesfully!" })
-    }).catch(err => {
-        /*res.status(500).send({
-            message: err.message || "Some error occurred while creating user"
-        });*/
-        res.render('results', { mydata: err.message || "Some error occurred while creating user" })
-    });
-};
+// Retrieve Products based on stock
+router.get("/instock", verifyToken, (req, res) => {
+    product.find({ inStock: true })
+        .then(data => { res.send(data); })
+        .catch(err => { res.status(500).send({ message: err }); })
+});
 
-exports.findAllPro = async (req, res) => {
-    try {
-        const product = await addproducts.find();
-        res.status(200).render('/products', {mydata: user})
-    } catch(error) {
-        res.status(404).render('results', {mydata: error.message})
-    }
-};
-exports.findOnePro = async (req, res) => {
-    try {
-        const user = await UserModel.findOnePro({email: req.query.productName}).exec(); //change params to query
-        
-    } catch(error) {
-        //res.status(404).json({ message: error.message});
-        res.status(404).render('results', {mydata: error.message})
-    }
-};
+router.get("/:id", (req, res) => {
+    product.findById(req.params.id)
+        .then(data => { res.send(data); })
+        .catch(err => { res.status(500).send({ message: err.message }); });
+});
+
+// Update Product
+router.put("/:id", verifyToken, (req, res) => {
+//router.put("/:id", (req, res) => {
+    const id = req.params.id;
+
+    product.findByIdAndUpdate(id, req.body)
+        .then(data => {
+            if (!data)
+                res.status(404).send({ message: "Cannot update product with id=" + id + ". Maybe product was not found!" });
+            else
+                res.send({ message: "Product was updated successfully." });
+        })
+        .catch(err => {
+            res.status(500).send({ message: "Error updating Product with id=" + id });
+        });
+
+});
+
+// Delete Product
+//router.delete("/:id", (req, res) => {
+router.delete("/:id", verifyToken, (req, res) => {
+    const id = req.params.id;
+
+    product.findByIdAndRemove(id,{useFindAndModify: false})
+        .then(data => {
+            if (!data) {
+                res.status(404).send({
+                    message: `Cannot delete Product with id=${id}. Maybe Product was not found!`
+                });
+            }
+            else { res.send({ message: "Product was deleted successfully!" }); }
+        })
+        .catch(err => {
+            res.status(500).send({ message: "Could not delete Product with id=" + id });
+        });
+});
+
+module.exports = router;

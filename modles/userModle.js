@@ -5,7 +5,7 @@ let schema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    firstName: {
+    fullName: {
         type: String,
         required: true,
         unique: true
@@ -17,7 +17,14 @@ let schema = new mongoose.Schema({
     confirmPassword: {
         type: String,
         required: true
+    },
+    date: {
+        type: Date,
+        required: true,
+        default: Date.now()
     }
     
 });
 const userModel = new mongoose.model('User', schema);
+
+module.exports = userModel

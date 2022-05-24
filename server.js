@@ -3,26 +3,25 @@ if(process.env.NODE_ENV !== 'production'){
 }
 // will bring all enviroment requirements and set them inside process dotenv
 const express = require('express');
-const layouts = require('express-ejs-layouts');
 const https = require('https');
 const http = require('http');
 const bodyParser = require('body-parser');
-const {response} = require("express");
 const cookiesPaser = require('cookie-parser');
-const session  = require('express-session');
 const mongodb = require('mongoose');
-const bcrypt = require('bcrypt');
-const methodOverride = require('method-override');
 const app = express();
-const passport = require('passport');
-const {login, register} = require('./controlers/userCont')
-const routs = require('./routs/routes');
-const flash = require('express-flash');
-const { rmSync } = require('fs');
-const request = require('request')
-const userModle = require('./modles/userModle')
-const subscribers = require('./routs/subscribers')
 const adminRout = require('./routs/admin.router')
+const swaggerJsDoc = require('swagger-jsdoc')
+const swaggerUi = require('swagger-ui-express')
+const userAthentication = require('./routs/routes')
+const subscriber = require('./routs/subscribe')
+
+let port = process.env.PORT;
+if (port == null || port == "") {
+    port = 3000;
+}
+
+
+
 
 app.set('view-engine', 'ejs');
 /*
@@ -47,10 +46,7 @@ const mydb = mongodb.connection;
 mydb.on('error', () => console.log('Error in connecting to Database'))
 mydb.once('open',()=> console.log('Database is connected!!'))
 
-let port = process.env.PORT;
-if (port == null || port == "") {
-    port = 3000;
-}
+
 
 
 // all usages of express
@@ -61,11 +57,12 @@ app.use('/css', express.static(__dirname+ '/css'));
 app.use('/img',express.static(__dirname+'/img'));
 app.use('/js', express.static(__dirname+ '/js'));
 app.use(cookiesPaser());
-app.use('/subscribers', subscribers)
 app.use('/admin', adminRout)
 app.use(express.json())
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.urlencoded({extended: false}));
+app.use(userAthentication)
+app.use('/subscribers',subscriber)
 // all routes
 app.get('/', (req, res )=>{
     res.render('index.ejs');
@@ -95,9 +92,6 @@ app.get('/about',(req,res)=>{
 app.get('/login',(req, res)=>{
     res.render('login.ejs');
 })
-app.post('/login',async (req, res) =>{
-   login(req, res)
-})
 
 app.get('/index',(req,res)=>{
     res.render('index.ejs');
@@ -123,19 +117,6 @@ app.get('/profile', (req,res)=>{
     });
 })
 // all form validations and cookie validations
-app.post('/register', async (req, res)=>{
-     
-    const password = req.body.password
-    const confirmPassword = req.body.confirmPassword
-
-    if(password === confirmPassword){
-        register(req, res)
-    }
-    else{
-        res.send("please enter the same password")
-    }
-
-})
 
 app.post('/checkout', function(req, res) {
     res.render('form.ejs');

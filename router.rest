@@ -8,7 +8,7 @@ GET  http://localhost:3000/subscribers/6289cb94a9a5acce30ce7f6d
 
 ###
 //add subscribers
-POST http://localhost:3000/subscribers
+POST http://localhost:3000/subscribe
 Content-Type: application/json
 
 {
