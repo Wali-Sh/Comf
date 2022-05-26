@@ -40,7 +40,8 @@ router.post("/register", async (req, res) => {
         if (err) {
             res.status(400).json({ err });
         } else {
-            res.render('index.ejs')
+            const name = user.fullName;
+            res.render('index.ejs', { fullName: name })
         }
     })
 
@@ -55,9 +56,9 @@ router.post("/login", async (req, res) => {
     if (error) {
         return res.status(400).json({ error: error.details[0].message });
     }
-    const User  = UserModel.findOne({ email: req.body.email })
+    const User = UserModel.findOne({ email: req.body.email })
     //if login info is valid find the user
-     UserModel.findOne({ email: req.body.email }, async function (err, user) {
+    UserModel.findOne({ email: req.body.email }, async function (err, user) {
 
         //throw error if email is wrong - user does not exist in DB
         if (err) {
@@ -65,10 +66,10 @@ router.post("/login", async (req, res) => {
         }
         else {
             if (user) {
-                //check for password correctness
+                const name = user.fullName;
                 const validPassword = await bcrypt.compare(req.body.password, user.password);
                 if (validPassword === true) {
-                    res.render('index.ejs')
+                    res.render('index.ejs', { fullName: name })
                 }
                 //throw error if password is wrong
                 if (!validPassword) {
@@ -79,17 +80,17 @@ router.post("/login", async (req, res) => {
     })
     //create authentication token with username and id
 
-     const token = jwt.sign
-     (
-         //payload data
-         {
-             name: User.name,
-             id: User._id
-         },
-         process.env.TOKEN_SECRET,
-         { expiresIn: process.env.JWT_EXPIRES_IN }, 
-     );
-     
-    })
+    const token = jwt.sign
+        (
+            //payload data
+            {
+                name: User.name,
+                id: User._id
+            },
+            process.env.TOKEN_SECRET,
+            { expiresIn: process.env.JWT_EXPIRES_IN },
+        );
+
+})
 
 module.exports = router;

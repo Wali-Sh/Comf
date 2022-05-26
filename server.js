@@ -31,7 +31,10 @@ const swaggerOptions = {
                 servers: [
                     {
                     url:'https://localhost:3000'
-                    } 
+                    },
+                    {
+                    url:'https://comfy-store-front.herokuapp.com' 
+                    }
                 ],
             components:{
                 bearerAuth: {
@@ -40,21 +43,15 @@ const swaggerOptions = {
                     bearerFormat: "JWT",
                 }
             },
-            security:[
-                {
-                    bearerAuth: [],
-                }
-            ]
         }
 
     },
-    apis: ['./routs/subscribers.js']
+    apis: ["./routs/*.js"]
 }
 const swaggerDoc = swaggerJsDoc(swaggerOptions)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc))
 
-
-app.set('view-engine', 'ejs');
+app.set('view-engine', 'ejs');  
 /*
 app.use(flash())
 app.use(session({ 
@@ -80,6 +77,8 @@ mydb.once('open',()=> console.log('Database is connected!!'))
 
 
 
+
+
 // all usages of express
 app.use(express.static('public'));
 app.use('/css', express.static(__dirname+ '/css'));
@@ -93,7 +92,7 @@ app.use(express.json())
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.urlencoded({extended: false}));
 app.use(userAthentication)
-app.use('/subscribers', subscriber)
+app.use('/subscribers', subscriber)   
 // all routes
 app.get('/', (req, res )=>{
     res.render('index.ejs');

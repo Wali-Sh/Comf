@@ -2,21 +2,43 @@ const express = require('express')
 const router = express.Router()
 const Subscriber = require('../modles/subscribe')
 
+/**
+ * @swagger
+ * definitions:
+ *  Subscribers:
+ *   type: object
+ *   properties:
+ *    name:
+ *     type: string
+ *     description: Name of the subscriber
+ *     example: 'Your Name'
+ *    subscribedToChannel:
+ *     type: string
+ *     description: Channel to subscribe
+ *     example: 'Name of channel'
+ *   Subscriber_Assignment:
+ *    type: object
+ *    properties:
+ *    subscriber_id:
+ *     type: string
+ *     description: Id of the subscriber
+ *     example: '123_mongodb Id'
+ *    
+ */
+
 // Getting all
 /**
  * @swagger
- * tags:
- *  name: All
- *  description: get all subscribers
  * /subscribers:
  *  get:
- *    tags:
- *      All
- *    responses:
- *      '200':
- *        description: successful
- *      '400': 
- *        description: unsuccessful 
+ *   summary: Gets All
+ *   description: Gets all subscribers
+ *   responses:
+ *    '200':
+ *     description: successfull
+ *    '400':
+ *     description: error
+ *  
  */
 router.get('/', async (req, res) => {
   try {
@@ -27,51 +49,49 @@ router.get('/', async (req, res) => {
   }
 })
 
-// Getting One
 /**
  * @swagger
- * /subscribers/{:id}:
+ * /subscribers/{subscriber_id}:
  *  get:
- *    tags:
- *     All:
- *    parameters:
- *       - name: subscriber
- *         in: query
- *         schema:
- *            type: string     
- *    responses:
- *      '200':
- *        description: successful
- *      '400': 
- *        description: unsuccessful 
+ *   summary: Get One
+ *   description: Get one subscriber
+ *   parameters:
+ *    - in: path
+ *      name: subscriber_id
+ *      schema:
+ *       type: string
+ *      required: true
+ *      description: Id of the subscriber
+ *      example: 'moongobd_ID'
+ *   responses:
+ *    '200':
+ *     description: successfull
+ *    '404':
+ *     description: not found
  */
 router.get('/:id', getSubscriber, (req, res) => {
   res.json(res.subscriber)
 })
 
-// Creating one
 /**
  * @swagger
- * /subscribers/{:id}:
+ * /subscribers:
  *  post:
- *    tags:
- *     All:
- *    parameters:
- *        required: true
- *        content:
- *           application/json:
- *              schema:
- *                type: object
- *                properties: 
- *                   name: 
- *                      type: string
- *                   subscribedToChannel: 
- *                      type: string     
- *    responses:
- *      '200':
- *        description: successful
- *      '400': 
- *        description: unsuccessful 
+ *   summary: Create
+ *   description: Create a new subscriber
+ *   parameters:
+ *    - in: body
+ *      name: body
+ *      required: true
+ *      description: body object
+ *      schema:
+ *       $ref: '#/definitions/Subscribers'
+ *   responses:
+ *    '201':
+ *     description: Subscriber created successfully
+ *    '400':
+ *     description: Subscriber failed to create
+ * 
  */
 router.post('/', async (req, res) => {
   const subscriber = new Subscriber({
@@ -87,6 +107,39 @@ router.post('/', async (req, res) => {
 })
 
 // Updating One
+/**
+ * @swagger
+ * /subscribers/{id}:
+ *  patch:
+ *   summary: update
+ *   description: update a single subscriber
+ *   consumes:
+ *    - application/json
+ *   produces:
+ *    - application/json
+ *   parameters:
+ *    - in: path
+ *      name: id
+ *      required: true
+ *      description: update a single subscriber
+ *      example: 'moongobd_ID'
+ *      schema:
+ *       $ref: '#/definitions/Subscribers'
+ *    - in: body
+ *      name: body
+ *      required: true
+ *      description: body object
+ *      schema:
+ *       $ref: '#/definitions/Subscribers'
+ *   responses:
+ *    '200':
+ *     description: successfull
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: '#/definitions/Subscribers'
+ *     
+ */
 router.patch('/:id', getSubscriber, async (req, res) => {
   if (req.body.name != null) {
     res.subscriber.name = req.body.name
@@ -103,6 +156,24 @@ router.patch('/:id', getSubscriber, async (req, res) => {
 })
 
 // Deleting One
+
+/**
+ * @swagger
+ * /subscribers/{subscriber_id}:
+ *  delete:
+ *   summary: Delete
+ *   description: Delete a subscriber by its
+ *   parameters:
+ *    - in: path
+ *      name: subscriber_id
+ *      schema:
+ *       type: string
+ *      required: true
+ *      description: Delete a subscriber by its id
+ *   responses:
+ *    '200':
+ *     description: subscriber deleted successfully
+ */
 router.delete('/:id', getSubscriber, async (req, res) => {
   try {
     await res.subscriber.remove()
