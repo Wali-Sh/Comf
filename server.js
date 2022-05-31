@@ -14,6 +14,8 @@ const swaggerJsDoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
 const userAthentication = require('./routs/routes')
 const subscriber = require('./routs/subscribers')
+const addCart = require('./modles/prodModle')
+const feedBack = require('./controlers/feedBackCont')
 
 let port = process.env.PORT;
 if (port == null || port == "") {
@@ -92,14 +94,23 @@ app.use(express.json())
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.urlencoded({extended: false}));
 app.use(userAthentication)
-app.use('/subscribers', subscriber)   
+app.use(feedBack)
+app.use('/subscribers', subscriber)  
 // all routes
 app.get('/', (req, res )=>{
     res.render('index.ejs');
 })
  
 app.get('/products', (req, res)=>{
-    res.render('products.ejs');
+    addCart.find({},function(err,item){
+        res.render('products.ejs',{item:item});
+    })
+
+})
+app.get('/cart',(req, res)=>{
+    addCart.find({},function(err,item){
+        res.render('cart.ejs',{item:item});
+    })
 })
 app.get('/single-product', (req, res)=>{
     res.render('single-product.ejs');
@@ -201,7 +212,18 @@ app.post('/paymentMethod', function(req, res){
      cvv: cvv,
     });
 })
+app.post('/addToCart', (req, res)=>{
+    addCart.findOne({productName:req.body.add}, (err, item)=>{
+        if(err){
+            res.status(500).json({message: err.message})
+        } else{
 
+            
+            res.redirect|('/cart');
+        //    res.render('/cart.ejs',{item:item})
+        }
+    })
+})
 // Shows the weather inside a Frame
 app.post('/weather',(req,res)=>{
     let city = req.body.city

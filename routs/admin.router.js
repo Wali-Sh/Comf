@@ -21,7 +21,7 @@ const router = AdminBroExpress.buildAuthenticatedRouter(adminBro,{
         if(email === ADMIN.email && password === ADMIN.password){
             return ADMIN;
         }
-        return null;  
+        return null;
     }
 })
 

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart || Comfy Store</title>
+    <!-- normalize  -->
+    <link rel="stylesheet" href="./css/normalize.css" />
+    <!-- font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    />
+    <!-- main css -->
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav class="navbar page">
+      <div class="nav-center">
+        <!-- links -->
+        <div>
+          <button class="toggle-nav">
+            <i class="fas fa-bars"></i>
+          </button>
+          <ul class="nav-links">
+            <li>
+              <a href="index" class="nav-link"> home </a>
+            </li>
+            <li>
+              <a href="products" class="nav-link"> products </a>
+            </li>
+            <li>
+              <a href="about" class="nav-link"> about </a>
+            </li>
+          </ul>
+        </div>
+        <!-- logo -->
+        <img src="./assets/logo-black.svg" class="nav-logo" alt="logo" />
+        <!-- cart icon -->
+        <div class="toggle-container">
+          <button class="toggle-cart">
+            <i class="fas fa-shopping-cart"></i>
+          </button>
+          <span class="cart-item-count">1</span>
+        </div>
+      </div>
+    </nav>
+    <div class="cart-overlay">
+        <aside class="cart">
+          <button class="cart-close">
+            <i class="fas fa-times"></i>
+          </button>
+          <header>
+            <h3 class="text-slanted">your bag</h3>
+          </header>
+          <!-- cart items -->
+          <div class="cart-items">
+            <!-- single cart item -->
+            <article class="cart-item">
+              <img
+                src=""
+                class="cart-item-img"
+                alt="product"
+              />
+              
+                <div class="cart-item-info">
+                  <h5 class="cart-item-name">product</h5>
+                  <span class="cart-item-price">9.9$</span>
+                  <button class="cart-item-remove-btn">remove</button>
+                </div>
+              
+            
+              <div>
+                <button class="cart-item-increase-btn">
+                  <i class="fas fa-chevron-up"></i>
+                </button>
+                <span class="cart-item-amount">1</span>
+                <button class="cart-item-decrease-btn">
+                  <i class="fas fa-chevron-down"></i>
+                </button>
+              </div>
+            </article>
+            <!-- end of single cart item -->
+            <!-- single cart item -->
+            <article class="cart-item">
+              <img
+                src="https://dl.airtable.com/.attachments/da5e17fd71f50578d525dd5f596e407e/d5e88ac8/product-2.jpg"
+                class="cart-item-img"
+                alt="product"
+              />
+              <div class="cart-item-info">
+                <h5 class="cart-item-name">product</h5>
+                <span class="cart-item-price">$19.99</span>
+                <button class="cart-item-remove-btn">remove</button>
+              </div>
+  
+              <div>
+                <button class="cart-item-increase-btn">
+                  <i class="fas fa-chevron-up"></i>
+                </button>
+                <span class="cart-item-amount">1</span>
+                <button class="cart-item-decrease-btn">
+                  <i class="fas fa-chevron-down"></i>
+                </button>
+              </div>
+            </article>
+            <!-- end of single cart item -->
+          </div>
+          <!-- footer -->
+          <form action="/checkout" method="post">
+          <footer>
+            <h3 class="cart-total text-slanted">total : $12.99</h3>
+            <button class="cart-checkout btn">checkout</button>
+          </footer>
+        </form>
+        </aside>
+      </div>
+ </body>
+</html>
