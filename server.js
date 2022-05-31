@@ -70,7 +70,7 @@ app.use(methodOverride('_method'))
 // database connection
 mongodb.connect('mongodb+srv://Wali:Wali1078$@cluster0.xeeua.mongodb.net/comfy?retryWrites=true&w=majority',{
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
 })
 const mydb = mongodb.connection;
 mydb.on('error', () => console.log('Error in connecting to Database'))
