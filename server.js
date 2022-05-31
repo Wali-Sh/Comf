@@ -1,7 +1,7 @@
 if(process.env.NODE_ENV !== 'production'){
     require('dotenv').config()
 }
-// will bring all enviroment requirements and set them inside process dotenv
+// will bring all enviromt requirements and set them inside process dotenv
 const express = require('express');
 const https = require('https');
 const http = require('http');
